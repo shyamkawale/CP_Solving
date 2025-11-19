@@ -1,0 +1,148 @@
+package cses.RoundTrip;
+
+import java.io.BufferedReader;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.OutputStream;
+import java.io.PrintWriter;
+import java.util.ArrayDeque;
+import java.util.ArrayList;
+import java.util.Deque;
+import java.util.List;
+import java.util.StringTokenizer;
+
+public class RoundTrip {
+    static boolean LOCAL = true;
+
+    static InputStream inputStream;
+    static OutputStream outputStream;
+    static FastScanner in;
+    static PrintWriter out;
+
+    public static void main(String[] args) throws Exception {
+        inputStream = LOCAL ? new FileInputStream("src/cses/RoundTrip/input.txt") : System.in;
+        outputStream = LOCAL ? new FileOutputStream("src/cses/RoundTrip/output.txt") : System.out;
+        in = new FastScanner(inputStream);
+        out = new PrintWriter(outputStream);
+        RoundTrip solver = new RoundTrip();
+
+        int t = 1;
+        while (t-- > 0) {
+            int n = in.nextInt();
+            int m = in.nextInt();
+
+            List<List<Integer>> adjList = new ArrayList<>();
+            for (int i = 0; i < n + 1; i++) {
+                adjList.add(new ArrayList<>());
+            }
+
+            for (int i = 0; i < m; i++) {
+                int u = in.nextInt();
+                int v = in.nextInt();
+
+                adjList.get(u).add(v);
+                adjList.get(v).add(u);
+            }
+
+            solver.solve(n, adjList);
+        }
+
+        out.flush();
+    }
+
+    private void solve(int n, List<List<Integer>> adjList) {
+        int[] vis = new int[n+1];
+        for(int i=1; i<=n; i++) {
+            if(vis[i] == 1) continue;
+            Deque<Integer> stack = new ArrayDeque<>();
+
+            if(dfs(i, -1, vis, stack, adjList)) {
+                while(!stack.peekFirst().equals(stack.peekLast())) {
+                    stack.removeLast();
+                }
+                out.println(stack.size());
+                while(!stack.isEmpty()) {
+                    out.print(stack.removeFirst() + " ");
+                }
+                return;
+            }
+        }
+        out.println("IMPOSSIBLE");
+    }
+
+    private boolean dfs(int curr, int parent, int[] vis, Deque<Integer> stack, List<List<Integer>> adjList) {
+        vis[curr] = 1;
+        stack.push(curr);
+
+        for(int neighbor: adjList.get(curr)) {
+            if(vis[neighbor] == 0) {
+                if(dfs(neighbor, curr, vis, stack, adjList)){
+                    return true;
+                }
+            }
+            else if(neighbor != parent) {
+                // cycle detected.
+                stack.push(neighbor);
+                return true;
+            }
+        }
+
+        stack.pop();
+        return false;
+    }
+
+
+    static class Pair<U, W> {
+        public final U vertex;
+        public final W weight;
+
+        public Pair(U vertex, W weight) {
+            this.vertex = vertex;
+            this.weight = weight;
+        }
+    }
+
+    static class FastScanner {
+        BufferedReader br;
+        StringTokenizer st;
+
+        FastScanner(InputStream stream) {
+            br = new BufferedReader(new InputStreamReader(stream));
+        }
+
+        String next() {
+            while (st == null || !st.hasMoreElements()) {
+                try {
+                    st = new StringTokenizer(br.readLine());
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
+            }
+            return st.nextToken();
+        }
+
+        int nextInt() {
+            return Integer.parseInt(next());
+        }
+
+        long nextLong() {
+            return Long.parseLong(next());
+        }
+
+        double nextDouble() {
+            return Double.parseDouble(next());
+        }
+
+        String nextLine() {
+            try {
+                return br.readLine();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            return null;
+        }
+    }
+}

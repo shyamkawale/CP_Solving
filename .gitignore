@@ -1,0 +1,53 @@
+# Compiled Java files
+*.class
+*.jar
+*.war
+*.ear
+
+# IDE specific files
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+*.iml
+*.iws
+*.ipr
+
+# Build directories
+bin/
+target/
+build/
+dist/
+
+# OS specific files
+.DS_Store
+Thumbs.db
+
+# IntelliJ IDEA
+out/
+*.iml
+.idea/
+
+# Eclipse
+.classpath
+.project
+.settings/
+
+# Maven
+target/
+pom.xml.tag
+pom.xml.releaseBackup
+pom.xml.versionsBackup
+pom.xml.next
+release.properties
+
+# Gradle
+.gradle/
+build/
+
+# Miscellaneous
+*.log
+*.tmp
+.env
+.DS_Store
