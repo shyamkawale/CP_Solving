@@ -13,6 +13,60 @@ import java.util.PriorityQueue;
 import java.util.Queue;
 import java.util.StringTokenizer;
 
+
+/*
+https://cses.fi/problemset/task/1164/
+
+There is a large hotel, and n customers will arrive soon. 
+Each customer wants to have a single room.
+You know each customer's arrival and departure day.
+Two customers can stay in the same room if
+the departure day of the first customer is earlier than the arrival day of the second customer.
+
+What is the minimum number of rooms that are needed to accommodate all customers? 
+And how can the rooms be allocated?
+
+Input
+The first input line contains an integer n: the number of customers.
+Then there are n lines, each of which describes one customer. 
+Each line has two integers a and b: the arrival and departure day.
+
+Output
+Print first an integer k: the minimum number of rooms required.
+After that, print a line that contains the room number of each customer in the same order as in the input. 
+The rooms are numbered 1,2,...,k. You can print any valid solution.
+*/
+
+/**
+ * RoomAllocation solves the minimum number of rooms (interval partitioning) problem.
+ *
+ * Given n customers with arrival and departure days, this class determines the minimum
+ * number of rooms required so that no two customers occupy the same room on overlapping
+ * days, and assigns a room number to each customer. This is also known as the Interval
+ * Partitioning Problem (or Minimum Number of Platforms / Meeting Rooms II).
+ *
+ * Two approaches are implemented:
+ *
+ * Approach 1 (solve1) - Brute Force Greedy:
+ * 1. Sort intervals by arrival day (ties broken by departure day).
+ * 2. For each unassigned interval, open a new room and greedily assign as many later
+ *    non-overlapping intervals as possible to the same room.
+ * 3. Repeat until all intervals are assigned.
+ * Time Complexity: O(n^2)
+ * Space Complexity: O(n)
+ *
+ * Approach 2 (solve2) - Min-Heap Greedy:
+ * 1. Sort intervals by arrival day.
+ * 2. Maintain a min-heap of currently occupied rooms keyed by their earliest free day
+ *    (departure time of the customer currently in the room).
+ * 3. For each interval, if the room with the smallest end time is still occupied
+ *    (endTime >= current arrival), allocate a new room; otherwise, reuse that room and
+ *    update its end time.
+ * 4. The total number of rooms ever opened is the answer.
+ * Time Complexity: O(n log n) due to sorting and heap operations
+ * Space Complexity: O(n) for the heap and answer array
+ *
+ */
 public class RoomAllocation {
     static boolean LOCAL = true;
 
