@@ -12,6 +12,19 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.StringTokenizer;
 
+/*
+https://cses.fi/problemset/task/1662
+
+Given an array of n integers, 
+your task is to count the number of subarrays where the sum of values is divisible by n.
+
+Input
+The first input line has an integer n: the size of the array.
+The next line has n integers a1,a2,....,an: the contents of the array.
+
+Output
+Print one integer: the required number of subarrays.
+*/
 public class SubarrayDivisibility {
     static boolean LOCAL = true;
 

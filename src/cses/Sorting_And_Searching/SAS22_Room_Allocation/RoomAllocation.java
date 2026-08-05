@@ -99,14 +99,14 @@ public class RoomAllocation {
 
     // TC: O(nlogn)
     private void solve2(int n, int[][] intervals) {
-        int[][] arr = new int[n][3];
+        int[][] idxArr = new int[n][3];
         for(int i=0; i<n; i++) {
-            arr[i][0] = intervals[i][0];
-            arr[i][1] = intervals[i][1];
-            arr[i][2] = i;
+            idxArr[i][0] = intervals[i][0];
+            idxArr[i][1] = intervals[i][1];
+            idxArr[i][2] = i;
         }
 
-        Arrays.sort(arr, (a, b) -> Integer.compare(a[0], b[0]));
+        Arrays.sort(idxArr, (a, b) -> Integer.compare(a[0], b[0]));
 
         Queue<Room> minHeap = new PriorityQueue<>((a, b) -> Integer.compare(a.endTime, b.endTime));
 
@@ -115,15 +115,15 @@ public class RoomAllocation {
 
         for(int i=0; i<n; i++) {
 
-            if(minHeap.isEmpty() || minHeap.peek().endTime >= arr[i][0]) {
+            if(minHeap.isEmpty() || minHeap.peek().endTime >= idxArr[i][0]) {
                 roomCount++;
-                ans[arr[i][2]] = roomCount;
-                minHeap.offer(new Room(arr[i][1], roomCount));
+                ans[idxArr[i][2]] = roomCount;
+                minHeap.offer(new Room(idxArr[i][1], roomCount));
             }
             else {
                 Room room = minHeap.poll();
-                ans[arr[i][2]] = room.roomNum;
-                room.endTime = arr[i][1];
+                ans[idxArr[i][2]] = room.roomNum;
+                room.endTime = idxArr[i][1];
                 minHeap.offer(room);
             }
         }
@@ -147,14 +147,14 @@ public class RoomAllocation {
 
     // TC: O(n^2)
     private void solve1(int n, int[][] intervals) {
-        int[][] arr = new int[n][3];
+        int[][] idxArr = new int[n][3];
         for(int i=0; i<n; i++) {
-            arr[i][0] = intervals[i][0];
-            arr[i][1] = intervals[i][1];
-            arr[i][2] = i;
+            idxArr[i][0] = intervals[i][0];
+            idxArr[i][1] = intervals[i][1];
+            idxArr[i][2] = i;
         }
 
-        Arrays.sort(arr, (a, b) -> {
+        Arrays.sort(idxArr, (a, b) -> {
             if(a[0] != b[0]) return Integer.compare(a[0], b[0]);
             return Integer.compare(a[1], b[1]);
         });
@@ -162,15 +162,15 @@ public class RoomAllocation {
         int[] ans = new int[n];
         int room = 1;
         for(int i=0; i<n; i++) {
-            if(ans[arr[i][2]] != 0) continue;
-            int last = arr[i][1];
-            ans[arr[i][2]] = room;
+            if(ans[idxArr[i][2]] != 0) continue;
+            int last = idxArr[i][1];
+            ans[idxArr[i][2]] = room;
             
             for(int j=i+1; j<n; j++) {
-                if(ans[arr[j][2]] != 0) continue;
-                if(last < arr[j][0]) {
-                    ans[arr[j][2]] = room;
-                    last = arr[j][1];
+                if(ans[idxArr[j][2]] != 0) continue;
+                if(last < idxArr[j][0]) {
+                    ans[idxArr[j][2]] = room;
+                    last = idxArr[j][1];
                 }
             }
             room++;

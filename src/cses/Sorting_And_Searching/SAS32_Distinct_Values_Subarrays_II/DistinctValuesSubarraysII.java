@@ -12,6 +12,19 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.StringTokenizer;
 
+/*
+https://cses.fi/problemset/task/2428
+
+Given an array of n integers, 
+your task is to calculate the number of subarrays that have at most k distinct values.
+
+Input
+The first input line has two integers n and k.
+The next line has n integers x1,x2,....,xn: the contents of the array.
+
+Output
+Print one integer: the number of subarrays.
+*/
 public class DistinctValuesSubarraysII {
     static boolean LOCAL = true;
 

@@ -11,6 +11,23 @@ import java.io.PrintWriter;
 import java.util.Arrays;
 import java.util.StringTokenizer;
 
+/*
+https://cses.fi/problemset/task/1630
+
+You have to process n tasks. 
+Each task has a duration and a deadline, and you will process the tasks in some order one after another. 
+Your reward for a task is d-f where d is its deadline and f is your finishing time. 
+(The starting time is 0, and you have to process all tasks even if a task would yield negative reward.)
+What is your maximum reward if you act optimally?
+
+Input
+The first input line has an integer n: the number of tasks.
+After this, there are n lines that describe the tasks. 
+Each line has two integers a and d: the duration and deadline of the task.
+
+Output
+Print one integer: the maximum reward.
+*/
 public class TasksandDeadlines {
     static boolean LOCAL = true;
 

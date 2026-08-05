@@ -12,6 +12,21 @@ import java.util.Arrays;
 import java.util.Comparator;
 import java.util.StringTokenizer;
 
+/*
+https://cses.fi/problemset/task/1642
+
+You are given an array of n integers, 
+and your task is to find four values (at distinct positions) whose sum is x.
+
+Input
+The first input line has two integers n and x: the array size and the target sum.
+The second line has n integers a1,a2,....,an: the array values.
+
+Output
+Print four integers: the positions of the values. 
+If there are several solutions, you may print any of them. 
+If there are no solutions, print IMPOSSIBLE.
+*/
 public class SumofFourValues {
     static boolean LOCAL = true;
 

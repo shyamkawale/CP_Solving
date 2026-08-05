@@ -10,6 +10,19 @@ import java.io.OutputStream;
 import java.io.PrintWriter;
 import java.util.StringTokenizer;
 
+/*
+https://cses.fi/problemset/task/1085
+
+You are given an array containing n positive integers.
+Your task is to divide the array into k subarrays so that the maximum sum in a subarray is as small as possible.
+
+Input
+The first input line contains two integers n and k: the size of the array and the number of subarrays in the division.
+The next line contains n integers x1,x2,....,xn: the contents of the array.
+
+Output
+Print one integer: the maximum sum in a subarray in the optimal division.
+*/
 public class ArrayDivision {
     static boolean LOCAL = true;
 

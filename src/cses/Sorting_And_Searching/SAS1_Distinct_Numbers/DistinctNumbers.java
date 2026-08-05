@@ -25,8 +25,8 @@ public class DistinctNumbers {
     static PrintWriter out;
 
     public static void main(String[] args) throws Exception {
-        inputStream = LOCAL ? new FileInputStream("src/cses/Distinct_Numbers/input.txt") : System.in;
-        outputStream = LOCAL ? new FileOutputStream("src/cses/Distinct_Numbers/output.txt") : System.out;
+        inputStream = LOCAL ? new FileInputStream("src/cses/Sorting_And_Searching/SAS1_Distinct_Numbers/input.txt") : System.in;
+        outputStream = LOCAL ? new FileOutputStream("src/cses/Sorting_And_Searching/SAS1_Distinct_Numbers/output.txt") : System.out;
         in = new FastScanner(inputStream);
         out = new PrintWriter(outputStream);
         DistinctNumbers solver = new DistinctNumbers();

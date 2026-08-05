@@ -13,6 +13,22 @@ import java.util.PriorityQueue;
 import java.util.StringTokenizer;
 import java.util.TreeMap;
 
+/*
+https://cses.fi/problemset/task/1632
+
+In a movie festival, n movies will be shown. 
+Syrjälä's movie club consists of k members, who will be all attending the festival.
+You know the starting and ending time of each movie. 
+What is the maximum total number of movies the club members can watch entirely if they act optimally?
+
+Input
+The first input line has two integers n and k: the number of movies and club members.
+After this, there are n lines that describe the movies. 
+Each line has two integers a and b: the starting and ending time of a movie.
+
+Output
+Print one integer: the maximum total number of movies.
+*/
 public class MovieFestivalII {
     static boolean LOCAL = false;
 

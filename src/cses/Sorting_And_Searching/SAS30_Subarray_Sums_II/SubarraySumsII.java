@@ -12,6 +12,19 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.StringTokenizer;
 
+/*
+https://cses.fi/problemset/task/1661
+
+Given an array of n integers, 
+your task is to count the number of subarrays having sum x.
+
+Input
+The first input line has two integers n and x: the size of the array and the target sum x.
+The next line has n integers a1,a2,....,an: the contents of the array.
+
+Output
+Print one integer: the required number of subarrays.
+*/
 public class SubarraySumsII {
     static boolean LOCAL = true;
 

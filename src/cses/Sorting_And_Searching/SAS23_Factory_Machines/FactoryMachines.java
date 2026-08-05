@@ -11,6 +11,17 @@ import java.io.PrintWriter;
 import java.util.Arrays;
 import java.util.StringTokenizer;
 
+/*
+https://cses.fi/problemset/task/1620
+
+A factory has n machines which can be used to make products. 
+Your goal is to make a total of t products.
+
+For each machine, you know the number of seconds it needs to make a single product. 
+The machines can work simultaneously, and you can freely decide their schedule.
+
+What is the shortest time needed to make t products?
+*/
 public class FactoryMachines {
     static boolean LOCAL = true;
 
@@ -43,26 +54,44 @@ public class FactoryMachines {
     private void solve(int machineCnt, int productCnt, int[] machines) {
         Arrays.sort(machines);
 
-        int a = machines[0];
-        int b = machines[1];
+        long left = 0;
+        long right = (long) machines[0] * productCnt;
 
-        int x =  binarySearch(a, b, productCnt);
-    }
+        long ans = -1;
 
-    
-
-    private int binarySearch(int a, int b, int productCnt) {
-        int left = 0;
-        int right = productCnt;
-
+        // F F F F T* T T T T
+        // 0 1 2 3 4 5 6 7 8
         while(left <= right) {
+            long mid = left + (right - left) / 2;
 
+            if(canMakeProducts(machines, mid, productCnt)) {
+                ans = mid;
+                right = mid - 1;
+            }
+            else {
+                left = mid + 1;
+            }
         }
 
-        return 0;
+        out.println(ans);
     }
 
+    private boolean canMakeProducts(int[] machines, long thresholdTime, long reqProductCnt) {
+        long totalProducts = 0;
 
+        for (int machineTime : machines) {
+            // thresholdTime madhye machine kiti products banavu shakte..
+            long productCntByMachine = thresholdTime / machineTime;
+            totalProducts = totalProducts + productCntByMachine;
+
+            // Early exit prevents unnecessary iterations and potential long overflow
+            if (totalProducts >= reqProductCnt) {
+                return true;
+            }
+        }
+
+        return false;
+    }
 
     static class FastScanner {
         BufferedReader br;

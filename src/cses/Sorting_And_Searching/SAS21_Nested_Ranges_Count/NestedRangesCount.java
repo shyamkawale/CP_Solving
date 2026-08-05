@@ -14,6 +14,12 @@ import java.util.Collections;
 import java.util.List;
 import java.util.StringTokenizer;
 
+/*
+https://cses.fi/problemset/task/2169
+
+Given n ranges, your task is to count for each range how many other ranges it contains and how many other ranges contain it.
+Range [a,b] contains range [c,d] if a <= c and d <= b.
+*/
 public class NestedRangesCount {
     static boolean LOCAL = true;
 
@@ -44,14 +50,14 @@ public class NestedRangesCount {
     }
 
     private void solve(int n, int[][] intervals) {
-        int[][] arr = new int[n][3];
+        int[][] idxArr = new int[n][3];
         for(int i=0; i<n; i++) {
-            arr[i][0] = intervals[i][0];
-            arr[i][1] = intervals[i][1];
-            arr[i][2] = i;
+            idxArr[i][0] = intervals[i][0];
+            idxArr[i][1] = intervals[i][1];
+            idxArr[i][2] = i;
         }
 
-        Arrays.sort(arr, (a, b) -> {
+        Arrays.sort(idxArr, (a, b) -> {
             if(a[0] != b[0]) return Integer.compare(a[0], b[0]);
             return Integer.compare(b[1], a[1]);
         });
@@ -59,24 +65,24 @@ public class NestedRangesCount {
         int[] contains = new int[n];
         List<Integer> minRight = new ArrayList<>();
         for(int i=n-1; i>=0; i--) {
-            int cnt = binarySearchToFindMins(minRight, arr[i][1]);
+            int cnt = binarySearchToFindMins(minRight, idxArr[i][1]);
 
             if(cnt != -1) {
-                contains[arr[i][2]] = cnt;
+                contains[idxArr[i][2]] = cnt;
             }
-            minRight.add(arr[i][1]);
+            minRight.add(idxArr[i][1]);
             Collections.sort(minRight);
         }
 
         int[] containedBy = new int[n];
         List<Integer> maxRight = new ArrayList<>();
         for(int i=0; i<n; i++) {
-            int cnt = binarySearchToFindMaxs(maxRight, arr[i][1]);
+            int cnt = binarySearchToFindMaxs(maxRight, idxArr[i][1]);
 
             if(cnt != -1) {
-                containedBy[arr[i][2]] = cnt;
+                containedBy[idxArr[i][2]] = cnt;
             }
-            maxRight.add(arr[i][1]);
+            maxRight.add(idxArr[i][1]);
             Collections.sort(maxRight);
         }
 

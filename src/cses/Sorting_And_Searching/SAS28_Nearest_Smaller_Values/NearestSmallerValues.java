@@ -12,6 +12,20 @@ import java.util.ArrayDeque;
 import java.util.Deque;
 import java.util.StringTokenizer;
 
+/*
+https://cses.fi/problemset/task/1645
+
+Given an array of n integers, 
+your task is to find for each array position the nearest position to its left having a smaller value.
+
+Input
+The first input line has an integer n: the size of the array.
+The second line has n integers x1,x2,...,xn: the array values.
+
+Output
+Print n integers: for each array position the nearest position with a smaller value. 
+If there is no such position, print 0.
+*/
 public class NearestSmallerValues {
     static boolean LOCAL = true;
 
